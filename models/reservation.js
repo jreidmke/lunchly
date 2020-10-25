@@ -46,6 +46,12 @@ class Reservation {
       VALUES ($1, $2, $3, 44)
       RETURNING id
       `, [this.customerId, this.startAt, this.numGuests, this.notes]);
+      this.id = result.rows[0];
+    } else {
+      await db.query(`
+        UPDATE reservations SET customer_id=$1, start_at=$2, num_guests=$3, notes=$4
+        WHERE id=$5
+      `, [this.customerId, this.startAt, this.numGuests,this.notes])
     }
   }
 }
