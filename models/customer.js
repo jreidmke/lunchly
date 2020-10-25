@@ -67,7 +67,7 @@ class Customer {
 
   /** save this customer. */
 
-  async save() {
+  async save() { // look at this. you only get an ID if you are inserted into the database. instantiating a customer or reservation will not create an id. this is how we check if it is new (needs to be inserted) or old (needs to be updated).
     if (this.id === undefined) {
       const result = await db.query(
         `INSERT INTO customers (first_name, last_name, phone, notes)
